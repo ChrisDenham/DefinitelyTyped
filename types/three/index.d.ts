@@ -24,6 +24,7 @@ export * from "./three-orbitcontrols";
 export * from "./three-orthographictrackballcontrols";
 export * from "./three-outlinepass";
 export * from "./three-projector";
+export * from "./three-reflector";
 export * from "./three-renderpass";
 export * from "./three-shaderpass";
 export * from "./three-smaapass";
