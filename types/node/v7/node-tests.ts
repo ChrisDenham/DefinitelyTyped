@@ -1,4 +1,4 @@
-import * as assert from "assert";
+import assert = require("assert");
 import * as fs from "fs";
 import * as events from "events";
 import events2 = require("events");
@@ -1379,6 +1379,46 @@ namespace path_tests {
     });
     // returns
     //    '/home/user/dir/file.txt'
+
+    path.format({
+        dir: "/home/user/dir",
+        base: "file.txt"
+    });
+    // returns
+    //    '/home/user/dir/file.txt'
+
+    path.posix.format({
+        root: "/",
+        dir: "/home/user/dir",
+        base: "file.txt",
+        ext: ".txt",
+        name: "file"
+    });
+    // returns
+    //    '/home/user/dir/file.txt'
+
+    path.posix.format({
+        dir: "/home/user/dir",
+        base: "file.txt"
+    });
+    // returns
+    //    '/home/user/dir/file.txt'
+
+    path.win32.format({
+        root: "C:\\",
+        dir: "C:\\home\\user\\dir",
+        ext: ".txt",
+        name: "file"
+    });
+    // returns
+    //    'C:\home\user\dir\file.txt'
+
+    path.win32.format({
+        dir: "C:\\home\\user\\dir",
+        base: "file.txt"
+    });
+    // returns
+    //    'C:\home\user\dir\file.txt'
 }
 
 ////////////////////////////////////////////////////
@@ -1944,6 +1984,26 @@ namespace errors_tests {
     {
         const myObject = {};
         Error.captureStackTrace(myObject);
+    }
+    {
+        let frames: NodeJS.CallSite[] = [];
+        Error.prepareStackTrace(new Error(), frames);
+    }
+    {
+        let frame: NodeJS.CallSite = null;
+        let frameThis: any = frame.getThis();
+        let typeName: string = frame.getTypeName();
+        let func: Function = frame.getFunction();
+        let funcName: string = frame.getFunctionName();
+        let meth: string = frame.getMethodName();
+        let fname: string = frame.getFileName();
+        let lineno: number = frame.getLineNumber();
+        let colno: number = frame.getColumnNumber();
+        let evalOrigin: string = frame.getEvalOrigin();
+        let isTop: boolean = frame.isToplevel();
+        let isEval: boolean = frame.isEval();
+        let isNative: boolean = frame.isNative();
+        let isConstr: boolean = frame.isConstructor();
     }
 }
 
